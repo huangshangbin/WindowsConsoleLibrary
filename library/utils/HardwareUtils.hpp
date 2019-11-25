@@ -84,10 +84,13 @@ public:
 		free(tmp);
 	}
 
-	static void keyboardBack()
+	static void keyboardBack(int times)
 	{
-		keybd_event(VK_BACK, NULL, KEYEVENTF_EXTENDEDKEY | 0, NULL);
-		keybd_event(VK_BACK, NULL, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, NULL);
+		for (int i = 0; i < times; i++)
+		{
+			keybd_event(VK_BACK, NULL, KEYEVENTF_EXTENDEDKEY | 0, NULL);
+			keybd_event(VK_BACK, NULL, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, NULL);
+		}
 	}
 
 
