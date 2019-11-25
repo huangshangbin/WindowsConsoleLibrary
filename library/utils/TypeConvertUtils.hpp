@@ -19,5 +19,10 @@ public:
 		return move(str);
 	}
 
+	static string getString(char chArray[])
+	{
+		return chArray;
+	}
+
 };
 

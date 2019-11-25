@@ -94,8 +94,7 @@ public:
 	}
 
 
-//keyboardText
-private:
+
 
 };
 
