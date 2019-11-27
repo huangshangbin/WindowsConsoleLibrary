@@ -26,6 +26,14 @@ public:
 		return move(wndInfoList);
 	}
 
+	static DWORD getWndProcessId(HWND wnd)
+	{
+		DWORD processId;
+		GetWindowThreadProcessId(wnd, &processId);
+
+		return processId;
+	}
+
 
 //getAllWndInfoList
 private:

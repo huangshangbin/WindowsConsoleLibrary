@@ -47,5 +47,10 @@ public:
 			return true;
 		}
 	}
+
+	static string getStringUsePos(string src, int startPos, int endPos)
+	{
+		return src.substr(startPos, endPos - startPos + 1);
+	}
 };
 
