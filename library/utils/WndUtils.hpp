@@ -34,10 +34,41 @@ public:
 		return processId;
 	}
 
+	static deque<WndInfo> getChildWndInfoList(HWND wnd)
+	{
+		deque<WndInfo> wndInfoList;
+		EnumChildWindows(wnd, getAllWndInfoListCall, (LPARAM)&wndInfoList);
+
+		return move(wndInfoList);
+	}
+
 
 //getAllWndInfoList
 private:
 	static BOOL CALLBACK getAllWndInfoListCall(HWND hwnd, LPARAM lParam)
+	{
+		deque<WndInfo>* wndInfoList = (deque<WndInfo>*) lParam;
+
+		char caption[200];
+		memset(caption, 0, sizeof(caption));
+		::GetWindowText(hwnd, caption, 200);
+
+		string text = caption;
+		if (text != "")
+		{
+			WndInfo wndInfo;
+			wndInfo.m_hwnd = hwnd;
+			wndInfo.m_text = text;
+
+			wndInfoList->emplace_back(wndInfo);
+		}
+
+		return TRUE;
+	}
+
+//getChildWndInfoList
+private:
+	static BOOL CALLBACK getChildWndInfoListCall(HWND hwnd, LPARAM lParam)
 	{
 		deque<WndInfo>* wndInfoList = (deque<WndInfo>*) lParam;
 

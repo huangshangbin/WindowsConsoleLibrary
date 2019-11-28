@@ -15,6 +15,7 @@ public:
 	{
 		return "";
 	}
+
 	static string getPreviousLayerPath(string path)
 	{
 		int index;

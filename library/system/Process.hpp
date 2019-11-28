@@ -47,4 +47,10 @@ public:
 	{
 		return FileUtils::getPreviousLayerPath(getPath());
 	}
+
+	void close()
+	{
+		HANDLE hHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_id);
+		TerminateProcess(hHandle, 0);
+	}
 };
