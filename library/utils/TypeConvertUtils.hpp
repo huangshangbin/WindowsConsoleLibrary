@@ -24,5 +24,9 @@ public:
 		return chArray;
 	}
 
+	static int getIntUseHexStr(string hexStr)
+	{
+
+	}
 };
 
