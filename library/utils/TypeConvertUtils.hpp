@@ -24,9 +24,10 @@ public:
 		return chArray;
 	}
 
-	static int getIntUseHexStr(string hexStr)
+	static long getLong(HWND wnd)
 	{
-
+		long wndLong = (long)wnd;
+		return wndLong;  //值是正确的， 可以用 0x + wnd值检测。  long value = 0xEC1789;
 	}
 };
 
