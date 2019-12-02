@@ -3,6 +3,8 @@ windows win32 console library
 
 #项目创建
 vs2015  --> 新建项目 --> win32 控制台程序 -->空项目 
+
+x64  Release
 属性 字符集--> 多字节字符集
 
 拉取类库后，属性 添加包含目录。 包含 include
