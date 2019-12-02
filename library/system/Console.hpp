@@ -28,7 +28,7 @@ public:
 		string typeStr = typeid(data).name();
 		if (typeStr == "i" || typeStr == "d" || typeStr == "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"
 			|| typeStr == "l" || typeStr == "c" || typeStr == "m" || typeStr == "b" || typeStr == "A5_c"
-			|| typeStr == "PKc" || typeStr =="char const *")//基础类型
+			|| typeStr == "PKc" || typeStr =="char const *" || typeStr == "char const * __ptr64")//基础类型
 		{
 			cout << data << endl;
 		}
