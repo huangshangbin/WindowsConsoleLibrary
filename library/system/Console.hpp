@@ -42,5 +42,11 @@ public:
 			cout << dataList[i] << endl;
 		}
 	}
+
+public:
+	void clear()
+	{
+		system("cls");
+	}
 };
 
