@@ -44,7 +44,7 @@ public:
 	}
 
 public:
-	void clear()
+	static void clear()
 	{
 		system("cls");
 	}
