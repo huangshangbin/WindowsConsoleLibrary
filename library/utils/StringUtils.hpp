@@ -10,7 +10,7 @@ using namespace std;
 class StringUtils
 {
 public:
-	static deque<string> splitString(string &srcStr, string splitStr)
+	static deque<string> splitString(string srcStr, string splitStr)
 	{
 		deque<string> dataList;
 
@@ -33,6 +33,17 @@ public:
 		dataList.push_back(str.substr(pos1));
 
 		return std::move(dataList);
+	}
+
+	static string splitStringGetOneStr(string srcStr, string splitStr, int index)
+	{
+		deque<string> strList = splitString(srcStr, splitStr);
+		if (index >= strList.size() || index < 0)
+		{
+			return "";
+		}
+
+		return strList[index];
 	}
 
 	static bool isExistStringInString(string srcStr, string existStr)
