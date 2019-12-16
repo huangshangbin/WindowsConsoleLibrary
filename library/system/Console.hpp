@@ -27,8 +27,10 @@ public:
 	{
 		string typeStr = typeid(data).name();
 		if (typeStr == "i" || typeStr == "d" || typeStr == "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"
-			|| typeStr == "l" || typeStr == "c" || typeStr == "m" || typeStr == "b" || typeStr == "A5_c"
-			|| typeStr == "PKc" || typeStr =="char const *" || typeStr == "char const * __ptr64")//基础类型
+			|| typeStr == "long" || typeStr == "c" || typeStr == "m" || typeStr == "b" || typeStr == "A5_c"
+			|| typeStr == "PKc" || typeStr =="char const *" || typeStr == "char const * __ptr64"
+			|| typeStr == "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >"
+		    || typeStr == "int" || typeStr == "struct HWND__ *" || typeStr == "unsigned long")//基础类型
 		{
 			cout << data << endl;
 		}

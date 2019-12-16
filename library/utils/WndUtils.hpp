@@ -2,6 +2,8 @@
 
 #include <windows.h>
 
+#include <library/utils/StringUtils.hpp>
+
 #include <deque>
 #include <string>
 #include <iostream>
@@ -17,6 +19,7 @@ public:
 
 class WndUtils
 {
+//窗口
 public:
 	static deque<WndInfo> getAllWndInfoList()
 	{
@@ -24,6 +27,28 @@ public:
 		EnumWindows(getAllWndInfoListCall, (LPARAM)&wndInfoList);
 
 		return move(wndInfoList);
+	}
+
+	static HWND getWnd(string wndExitText, bool isWait = false)//窗口文本的一部分
+	{
+		while (true)
+		{
+			deque<WndInfo> wndList = getAllWndInfoList();
+			for (WndInfo wndInfo : wndList)
+			{
+				if (StringUtils::isExistStringInString(wndInfo.m_text, wndExitText))
+				{
+					return wndInfo.m_hwnd;
+				}
+			}
+
+			if (isWait == false)
+			{
+				break;
+			}
+		}
+
+		return 0;
 	}
 
 	static DWORD getWndProcessId(HWND wnd)
@@ -37,9 +62,31 @@ public:
 	static deque<WndInfo> getChildWndInfoList(HWND wnd)
 	{
 		deque<WndInfo> wndInfoList;
-		EnumChildWindows(wnd, getAllWndInfoListCall, (LPARAM)&wndInfoList);
+		EnumChildWindows(wnd, getChildWndInfoListCall, (LPARAM)&wndInfoList);
 
 		return move(wndInfoList);
+	}
+
+	static string getWndText(HWND wnd)
+	{
+		char caption[200];
+		memset(caption, 0, sizeof(caption));
+		::GetWindowText(wnd, caption, 200);
+
+		string text = caption;
+		return text;
+	}
+
+//控件
+public:
+	static int getCtrlId(HWND ctrlWnd)
+	{
+		return GetDlgCtrlID(ctrlWnd);
+	}
+
+	static HMENU getWndMenu(HWND wnd)
+	{
+		return GetMenu(wnd);
 	}
 
 
@@ -77,14 +124,12 @@ private:
 		::GetWindowText(hwnd, caption, 200);
 
 		string text = caption;
-		if (text != "")
-		{
-			WndInfo wndInfo;
-			wndInfo.m_hwnd = hwnd;
-			wndInfo.m_text = text;
+		//if (text != "") 有些控件获取不到文本，所以不能过滤
+		WndInfo wndInfo;
+		wndInfo.m_hwnd = hwnd;
+		wndInfo.m_text = text;
 
-			wndInfoList->emplace_back(wndInfo);
-		}
+		wndInfoList->emplace_back(wndInfo);
 
 		return TRUE;
 	}
