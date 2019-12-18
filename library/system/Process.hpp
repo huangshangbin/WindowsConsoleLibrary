@@ -23,6 +23,7 @@ public:
 private:
 	DWORD m_id;
 
+//基本用法
 public:
 	string getPath()
 	{
@@ -48,6 +49,19 @@ public:
 		return FileUtils::getPreviousLayerPath(getPath());
 	}
 
+	HANDLE getHandle()
+	{
+		return ::OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_id);
+	}
+
+	void close()
+	{
+		HANDLE hHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_id);
+		TerminateProcess(hHandle, 0);
+	}
+
+//高级用法
+public:
 	bool promotePower()
 	{
 		HANDLE processHandle = getHandle();
@@ -77,15 +91,52 @@ public:
 		return true;
 	}
 
-	HANDLE getHandle()
+	// 注入32位程序 只能用32位程序注入32位dll到目标32位程序，64位同理。
+	void injectionDll(string dllPath)
 	{
-		return ::OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_id);
-	}
+		SIZE_T dwThreadSize = 5 * 1024;
+		DWORD dwWriteBytes;
 
-	void close()
-	{
-		HANDLE hHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_id);
-		TerminateProcess(hHandle, 0);
+		if (promotePower() == false)
+		{
+			cout<<"提升权限失败"<<endl;
+		}
+
+		HANDLE hTargetProcess = getHandle();
+		if (!hTargetProcess)
+		{
+			cout << "获取进程句柄失败" << endl;
+			return;
+		}
+
+		void* pRemoteThread = VirtualAllocEx(hTargetProcess, NULL, dwThreadSize, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+		if (!pRemoteThread)
+		{
+			cout << "pRemoteThread  error" << endl;
+			return;
+		}
+
+		if (!WriteProcessMemory(hTargetProcess, pRemoteThread, (LPVOID)dllPath.c_str(), dwThreadSize, 0))
+		{
+			cout << "WriteProcessMemory  error" << endl;
+			return;
+		}
+
+		LPVOID pFunc = LoadLibraryA;
+		HANDLE hRemoteThread = CreateRemoteThread(hTargetProcess, NULL, 0, (LPTHREAD_START_ROUTINE)pFunc,
+			pRemoteThread, 0, &dwWriteBytes);
+		if (!hRemoteThread)
+		{
+			cout << "hRemoteThread  error" << endl;
+			return;
+		}
+		
+		//WaitForSingleObject(hRemoteThread, INFINITE); //让dll如果无限循环，程序会崩溃
+		
+		VirtualFreeEx(hTargetProcess, pRemoteThread, dwThreadSize, MEM_COMMIT);
+
+		CloseHandle(hRemoteThread);
+		CloseHandle(hTargetProcess);
 	}
 
 
