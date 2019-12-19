@@ -2,6 +2,8 @@
 
 #include <windows.h>
 
+#include <library/system/Process.hpp>
+
 #include <string>
 using namespace std;
 
@@ -15,18 +17,20 @@ public:
 
 	static void syncLoadExe(string exePath)
 	{
-		PROCESS_INFORMATION ProcessInfo;
-		STARTUPINFO StartupInfo; //This is an [in] parameter
-		ZeroMemory(&StartupInfo, sizeof(StartupInfo));
-		StartupInfo.cb = sizeof StartupInfo; //Only compulsory field
-		if (CreateProcess(exePath.c_str(), NULL,
-			NULL, NULL, FALSE, 0, NULL,
-			NULL, &StartupInfo, &ProcessInfo))
-		{
-			WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
+		ShellExecute(NULL, "open", exePath.c_str(), NULL, NULL, SW_SHOW);
 
-			CloseHandle(ProcessInfo.hThread);
-			CloseHandle(ProcessInfo.hProcess);
+		while (true)
+		{
+			deque<Process> processList = Process::getAllProcess();
+			for (Process processItem : processList)
+			{
+				if (processItem.getPath() == exePath)
+				{
+					return;
+				}
+			}
+
+			Sleep(300);
 		}
 	}
 

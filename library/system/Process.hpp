@@ -145,4 +145,29 @@ public:
 	{
 		return ::GetCurrentProcessId();
 	}
+
+	static deque<Process> getAllProcess()
+	{
+		deque<Process> processList;
+
+		HANDLE hHandle = ::CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+		if (hHandle != INVALID_HANDLE_VALUE)
+		{
+			PROCESSENTRY32 stEntry;
+			stEntry.dwSize = sizeof(PROCESSENTRY32);
+			if (::Process32First(hHandle, &stEntry))
+			{
+				processList.push_back(Process(stEntry.th32ProcessID));
+			}
+
+			while (::Process32Next(hHandle, &stEntry))
+			{
+				processList.push_back(Process(stEntry.th32ProcessID));
+			}
+		}
+
+		CloseHandle(hHandle);
+
+		return std::move(processList);
+	}
 };
