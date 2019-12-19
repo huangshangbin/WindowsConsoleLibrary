@@ -21,6 +21,11 @@ public:
 		return move(str);
 	}
 
+	static string getString(int intValue)
+	{
+		return std::to_string(intValue);
+	}
+
 	static string getString(char chArray[])
 	{
 		return chArray;
