@@ -3,6 +3,7 @@
 #include <windows.h>
 
 #include <library/system/Process.hpp>
+#include <library/utils/WndUtils.hpp>
 
 #include <string>
 using namespace std;

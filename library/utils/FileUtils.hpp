@@ -13,7 +13,23 @@ class FileUtils
 public:
 	static string getFileOrDirName(string path)
 	{
-		return "";
+		int index;
+		for (int i = path.length(); i > 0; i--)
+		{
+			if (i == 0)
+			{
+				return path;
+			}
+
+			if (path[i] == '\\')
+			{
+				index = i;
+				break;
+			}
+		}
+
+		string result = StringUtils::getStringUsePos(path, index + 1, path.length());
+		return result;
 	}
 
 	static string getPreviousLayerPath(string path)
