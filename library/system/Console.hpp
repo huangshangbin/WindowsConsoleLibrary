@@ -30,7 +30,8 @@ public:
 			|| typeStr == "long" || typeStr == "c" || typeStr == "m" || typeStr == "b" || typeStr == "A5_c"
 			|| typeStr == "PKc" || typeStr =="char const *" || typeStr == "char const * __ptr64"
 			|| typeStr == "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >"
-		    || typeStr == "int" || typeStr == "struct HWND__ *" || typeStr == "unsigned long")//基础类型
+		    || typeStr == "int" || typeStr == "struct HWND__ *" || typeStr == "unsigned long"
+			|| typeStr == "unsigned int")//基础类型
 		{
 			cout << data << endl;
 		}

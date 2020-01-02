@@ -77,6 +77,11 @@ public:
 		return text;
 	}
 
+	static void closeWnd(HWND wnd)
+	{
+		PostMessageA(wnd, WM_CLOSE, 0, 0);
+	}
+
 //¿Ø¼þ
 public:
 	static int getCtrlId(HWND ctrlWnd)
