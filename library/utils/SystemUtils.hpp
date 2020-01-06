@@ -16,6 +16,22 @@ public:
 		ShellExecute(NULL, "open", exePath.c_str(), NULL, NULL, SW_SHOW);
 	}
 
+	static void loadExeWaitComplete(string exePath)
+	{
+		SHELLEXECUTEINFO ShExecInfo = { 0 };
+		ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
+		ShExecInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
+		ShExecInfo.hwnd = NULL;
+		ShExecInfo.lpVerb = NULL;
+		ShExecInfo.lpFile = exePath.c_str();
+		ShExecInfo.lpParameters = NULL;
+		ShExecInfo.lpDirectory = NULL;
+		ShExecInfo.nShow = SW_SHOW;
+		ShExecInfo.hInstApp = NULL;
+		ShellExecuteEx(&ShExecInfo);
+		WaitForSingleObject(ShExecInfo.hProcess, INFINITE);
+	}
+
 	static void syncLoadExe(string exePath)
 	{
 		ShellExecute(NULL, "open", exePath.c_str(), NULL, NULL, SW_SHOW);
