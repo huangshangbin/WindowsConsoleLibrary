@@ -82,6 +82,13 @@ public:
 		PostMessageA(wnd, WM_CLOSE, 0, 0);
 	}
 
+//消息
+public:
+	static void sendCommandMsg(HWND wnd, int cmdId)
+	{
+		PostMessageA(wnd, WM_COMMAND, cmdId, 0);
+	}
+
 //控件
 public:
 	static int getCtrlId(HWND ctrlWnd)
@@ -92,6 +99,22 @@ public:
 	static HMENU getWndMenu(HWND wnd)
 	{
 		return GetMenu(wnd);
+	}
+
+//检查框
+public:
+	static void clickCheckBox(HWND checkBoxWnd)
+	{
+		LPARAM lparam = MAKELPARAM(3, 3); //x坐标，y坐标
+		LRESULT result = ::SendMessage(checkBoxWnd, WM_LBUTTONDOWN, MK_LBUTTON, lparam);
+		LRESULT result1 = ::SendMessage(checkBoxWnd, WM_LBUTTONUP, MK_LBUTTON, lparam);
+	}
+
+//按钮
+public:
+	static void clickButton(HWND buttonWnd)
+	{
+		SendMessageA(buttonWnd, BM_CLICK, 0, 0);
 	}
 
 
