@@ -26,12 +26,14 @@ public:
 	static void out(T data)
 	{
 		string typeStr = typeid(data).name();
+		//cout << typeStr << endl;
 		if (typeStr == "i" || typeStr == "d" || typeStr == "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"
 			|| typeStr == "long" || typeStr == "c" || typeStr == "m" || typeStr == "b" || typeStr == "A5_c"
 			|| typeStr == "PKc" || typeStr =="char const *" || typeStr == "char const * __ptr64"
 			|| typeStr == "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >"
 		    || typeStr == "int" || typeStr == "struct HWND__ *" || typeStr == "unsigned long"
-			|| typeStr == "unsigned int")//基础类型
+			|| typeStr == "class std::sub_match<class std::_String_const_iterator<class std::_String_val<struct std::_Simple_types<char> > > >"
+			|| typeStr == "unsigned int" || typeStr == "bool")//基础类型
 		{
 			cout << data << endl;
 		}
