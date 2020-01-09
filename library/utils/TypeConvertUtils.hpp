@@ -69,6 +69,11 @@ public:
 		return wstr;
 	}
 
+	static void getCharArray(char chArray[], string text)
+	{
+		strcpy_s(chArray, text.length() + 1, text.c_str());
+	}
+
 	static long getLong(HWND wnd)
 	{
 		long wndLong = (long)wnd;

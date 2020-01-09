@@ -118,6 +118,16 @@ public:
 	}
 
 
+//‘”œÓ
+public:
+	static void messageBox(string text)
+	{
+		char textArray[2000];
+		strcpy_s(textArray, text.length() + 1, text.c_str());	
+
+		MessageBox(NULL, textArray, "Ã· æ", MB_OK);
+	}
+
 //getAllWndInfoList
 private:
 	static BOOL CALLBACK getAllWndInfoListCall(HWND hwnd, LPARAM lParam)
