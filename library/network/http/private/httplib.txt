@@ -1,0 +1,46 @@
+服务端
+#include <library/network/http/private/httplib.h>
+using namespace httplib;
+
+	Server svr;
+
+	svr.Get("/", [](const Request & /*req*/, Response &res) {
+		res.set_content("huang", "text/html");
+	});
+
+	svr.Post("/post", [](const Request &req, Response &res) {
+		for (auto& head : req.headers)
+		{
+			cout << head.first <<" "<<head.second << endl;
+		}
+
+		auto body = req.body;
+		cout << body << endl;
+
+		res.set_content("done", "text/plain");
+	});
+
+	svr.listen("localhost", 3000);
+
+客户端
+#include <library/network/http/private/httplib.h>
+using namespace httplib;
+
+	httplib::Client httpClient("www.wangjingxian.cn", 80);
+	auto res = httpClient.Get("/qita/216.html");
+
+	FileUtils::writeFile(res->body, "E:\\temp\\baidu.txt");
+	//AfxMessageBox(res->body.c_str());
+
+
+编译
+    1. 最上面8行 #undef max 
+	2.   std::min  改为  min
+	3. c/c++ 预处理器  添加 WIN32_LEAN_AND_MEAN
+
+
+说明：
+      1. github地址    https://github.com/yhirose/cpp-httplib
+	
+	  
+	   

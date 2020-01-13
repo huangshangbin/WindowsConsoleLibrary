@@ -1,6 +1,7 @@
 #pragma once
 
 #include <windows.h>
+#include <shellapi.h> 
 
 #include <library/system/Process.hpp>
 #include <library/utils/WndUtils.hpp>
