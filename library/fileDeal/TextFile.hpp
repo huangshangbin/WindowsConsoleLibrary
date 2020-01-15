@@ -90,9 +90,18 @@ public:
 private:
 	void initDataList()
 	{
-		ByteStreamFile byteStreamFile(m_filePath);
+		ifstream inFileStream(m_filePath, std::ios::binary);
 
-		string data(byteStreamFile.getBuffer());
+		inFileStream.seekg(0, std::ios::end);
+		int fileLength = inFileStream.tellg();
+
+		inFileStream.seekg(0, std::ios::beg);
+		char* fileBuffer = new char[fileLength +1];
+		inFileStream.read(fileBuffer, fileLength);
+
+		fileBuffer[fileLength] = '\0';
+
+		string data(fileBuffer);
 		m_dataList = StringUtils::splitString(data, "\n");
 	}
 
