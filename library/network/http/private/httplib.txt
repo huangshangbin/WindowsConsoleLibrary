@@ -4,6 +4,8 @@ using namespace httplib;
 
 	Server svr;
 
+	svr.set_base_dir("./www"); 
+
 	svr.Get("/", [](const Request & /*req*/, Response &res) {
 		res.set_content("huang", "text/html");
 	});
@@ -41,6 +43,7 @@ using namespace httplib;
 
 说明：
       1. github地址    https://github.com/yhirose/cpp-httplib
-	
+	  2. set_base_dir() 拷贝 cpp-httplib-master\test\www 文件夹到exe所在目录。
+	     浏览器输入 http://localhost:3000/dir/test.html 即可访问。
 	  
 	   

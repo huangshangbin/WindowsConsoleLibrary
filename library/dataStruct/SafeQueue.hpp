@@ -1,5 +1,9 @@
 #pragma once
 
+/*
+   github : https://github.com/yangxingwu/thread_safe_queue/blob/master/thread_safe_queue.cpp
+*/
+
 #include <queue>
 
 #include <memory>
@@ -61,6 +65,13 @@ public:
 		m_queue.pop();
 
 		return data;
+	}
+
+	bool empty()
+	{
+		lock_guard<mutex> lockGuard(m_mutex);
+
+		return m_queue.empty();
 	}
 
 

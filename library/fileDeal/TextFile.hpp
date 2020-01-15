@@ -55,6 +55,22 @@ public:
 		return m_dataList.size();
 	}
 
+	void erase(int row)
+	{
+		if (row < 0 || row >= m_dataList.size())
+		{
+			return;
+		}
+
+		auto eraseIt = m_dataList.begin();
+		for (int i = 0; i < row; i++)
+		{
+			eraseIt++;
+		}
+
+		m_dataList.erase(eraseIt);
+	}
+
 	void save()
 	{
 		string data;
@@ -70,13 +86,25 @@ public:
 		ByteStreamFile::writeFile(m_filePath, data.c_str(), data.length());
 	}
 
+
 private:
 	void initDataList()
 	{
 		ByteStreamFile byteStreamFile(m_filePath);
 
-		string data = byteStreamFile.getBuffer();
+		string data(byteStreamFile.getBuffer());
 		m_dataList = StringUtils::splitString(data, "\n");
+	}
+
+
+//²âÊÔ
+public:
+	void out()
+	{
+		for (auto& data : m_dataList)
+		{
+			cout << data << endl;
+		}
 	}
 };
 
