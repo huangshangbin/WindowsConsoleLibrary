@@ -117,6 +117,23 @@ public:
 		SendMessageA(buttonWnd, BM_CLICK, 0, 0);
 	}
 
+//±à¼­¿ò
+public:
+	static void addEditText(HWND editWnd, string text)
+	{
+		for (int i = 0; i <= text.size(); i++)
+		{
+			PostMessageA(editWnd, WM_CHAR, text[i], 0);
+		}
+	}
+
+	static void clearEdit(HWND editWnd)
+	{
+		for (int i = 0; i < 100; i++)
+		{
+			PostMessageA(editWnd, WM_KEYDOWN, 0x2E, 1);
+		}
+	}
 
 //ÔÓÏî
 public:
