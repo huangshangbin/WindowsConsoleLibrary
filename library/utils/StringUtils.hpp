@@ -2,6 +2,7 @@
 
 #include <deque>
 #include <string>
+#include <windows.h>
 
 #include <iostream>
 using namespace std;
