@@ -5,7 +5,9 @@ windows win32 console library
 vs2015  --> 新建项目 --> win32 控制台程序 -->空项目 
 
 x64  Release
-属性 字符集--> 多字节字符集
+属性 常规 字符集--> 多字节字符集
+
+配置属性 c++ 预处理器   预处理器定义 WIN32_LEAN_AND_MEAN
 
 拉取类库后，属性 添加包含目录。 包含 include
 

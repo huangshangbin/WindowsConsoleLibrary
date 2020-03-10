@@ -1,0 +1,20 @@
+#include <library/network/http/HttpServer.hpp>
+
+class TestService : public HttpService
+{
+public:
+	TestService()
+	{
+		bindGetRoute("/test", TestService::test);
+	}
+
+public:
+	static void test(const Request& request, Response& response)
+	{
+		response.set_content("²âÊÔÂ·ÓÉ", "text/html");
+	}
+};
+
+HttpServer server;
+server.addHttpService(new TestService());
+server.listen(3000);
