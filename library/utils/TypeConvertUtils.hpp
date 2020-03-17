@@ -50,6 +50,16 @@ public:
 		return str;
 	}
 
+	static string getString(long longValue)
+	{
+		return std::to_string(longValue);
+	}
+
+	static string getString(long long longlongValue)
+	{
+		return std::to_string(longlongValue);
+	}
+
 	static wstring getWString(string str)
 	{
 		LPCSTR pszSrc = str.c_str();
