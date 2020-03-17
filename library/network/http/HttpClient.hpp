@@ -17,6 +17,8 @@ using namespace httplib;
 class UrlParse
 {
 public:
+	UrlParse() {}
+
 	UrlParse(string url)
 	{
 		url = StringUtils::splitStringGetOneStr(url, "//", 1);
