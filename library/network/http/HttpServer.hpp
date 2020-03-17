@@ -34,9 +34,9 @@ public:
 		delete httpService;
 	}
 
-	void listen(int port)
+	bool listen(int port)
 	{
-		m_sever.listen("localhost", port);
+		return m_sever.listen("localhost", port);
 	}
 
 

@@ -18,3 +18,9 @@ public:
 HttpServer server;
 server.addHttpService(new TestService());
 server.listen(3000);
+
+--------------------
+常用Content-Type
+      纯文本 text/plain
+	  Json   application/json
+	  其他参考 https://www.runoob.com/http/http-content-type.html
