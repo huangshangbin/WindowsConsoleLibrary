@@ -60,6 +60,25 @@ public:
 		}
 	}
 
+	static bool isEqualString(string srcStr1, string srcStr2)
+	{
+		if (srcStr1 == srcStr2)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	static bool isUseStringEnd(string srcStr, string endStr)
+	{
+		string compareCS = getStringUsePos(srcStr, srcStr.length() - endStr.length(), srcStr.length());
+
+		return StringUtils::isEqualString(compareCS, endStr);
+	}
+
 	static string getStringUsePos(string src, int startPos, int endPos)
 	{
 		return src.substr(startPos, endPos - startPos + 1);
@@ -102,6 +121,8 @@ public:
 
 		return getStringUsePos(src, 0, index - 1);
 	}
+
+	
 
 
 	static string getUtf8UseGbk(string content)

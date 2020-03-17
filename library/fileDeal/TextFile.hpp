@@ -25,6 +25,11 @@ public:
 		DequeUtils<string>::copy(m_dataList, dataList);
 	}
 
+	void exportDataList(deque<string>& dataList)
+	{
+		DequeUtils<string>::copy(dataList, m_dataList);
+	}
+
 	void push(string str)
 	{
 		m_dataList.push_back(str);

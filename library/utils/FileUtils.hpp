@@ -52,4 +52,9 @@ public:
 		return StringUtils::getStringUsePos(path, 0, index - 1);
 	}
 
+	static void deleteFile(string filePath)
+	{
+		SetFileAttributes(filePath.c_str(), 0);
+		DeleteFile(filePath.c_str());
+	}
 };

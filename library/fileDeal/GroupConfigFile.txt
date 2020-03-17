@@ -1,0 +1,16 @@
+使用:
+#include <library/fileDeal/GroupConfigFile.hpp>
+
+GroupConfigFile configFile("config.txt");
+	configFile.setGroup("TestGroup");
+	configFile.setValue("name", "huangshangbin");
+	configFile.setValue("age", "18");
+
+
+
+	Console::out(configFile.getIntValue("age"));
+	Console::out(configFile.getStringValue("info"));
+
+
+说明：
+    1  详细说明参考 mfc 类库 GroupConfigFile 类
