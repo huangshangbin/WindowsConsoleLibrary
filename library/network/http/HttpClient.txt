@@ -8,7 +8,7 @@
 				ByteStreamFile::writeFile(file.filename, file.content.c_str(), file.content.length());
 			}
 			
-			res.set_content("ok", "text/html");
+			res.set_content("ok", "text/plain");
 		});
 
 	¿Í»§¶Ë

@@ -43,6 +43,13 @@ public:
 	string m_host;
 	string m_route;
 	int m_port;
+
+public:
+	string getUrl()
+	{
+		string url = "http://" + m_host + ":" + TypeConvertUtils::getString(m_port) + m_route;
+		return url;
+	}
 };
 
 
