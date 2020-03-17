@@ -1,0 +1,20 @@
+上传文件:
+    服务端
+	svr.Post("/multipart", [](const Request & req, Response &res) {
+
+			for (auto& keyValueFile : req.files)
+			{
+				auto& file = keyValueFile.second;
+				ByteStreamFile::writeFile(file.filename, file.content.c_str(), file.content.length());
+			}
+			
+			res.set_content("ok", "text/html");
+		});
+
+	客户端
+	deque<string> filePathList;
+	filePathList.emplace_back("E:\\project\\c++\\win32Dll\\TestServerApi\\Debug\\TestServerApi.dll");
+	filePathList.emplace_back("E:\\project\\c++\\win32Dll\\TestServerApi\\Debug\\test.txt");
+	
+	HttpClient::postFileList("http://localhost:3000/multipart", filePathList);
+	或者上传单文件  HttpClient::postFile()

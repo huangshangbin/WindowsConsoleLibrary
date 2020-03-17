@@ -65,6 +65,44 @@ public:
 		return src.substr(startPos, endPos - startPos + 1);
 	}
 
+	static string getStringUseCharStart(string src, char startChar)
+	{
+		int index = -1;
+		for (int i = 0; i < src.length(); i++)
+		{
+			if (src[i] == startChar)
+			{
+				index = i;
+				break;
+			}
+		}
+		if (index == -1)
+		{
+			return "";
+		}
+
+		return getStringUsePos(src, index + 1, src.length());
+	}
+
+	static string getStringUseCharEnd(string src, char endChar)
+	{
+		int index = -1;
+		for (int i = 0; i < src.length(); i++)
+		{
+			if (src[i] == endChar)
+			{
+				index = i;
+				break;
+			}
+		}
+		if (index == -1)
+		{
+			return "";
+		}
+
+		return getStringUsePos(src, 0, index - 1);
+	}
+
 
 	static string getUtf8UseGbk(string content)
 	{
