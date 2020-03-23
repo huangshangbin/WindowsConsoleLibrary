@@ -14,3 +14,4 @@ GroupConfigFile configFile("config.txt");
 
 说明：
     1  详细说明参考 mfc 类库 GroupConfigFile 类
+	2
