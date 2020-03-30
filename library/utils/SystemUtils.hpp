@@ -33,6 +33,7 @@ public:
 		WaitForSingleObject(ShExecInfo.hProcess, INFINITE);
 	}
 
+	//同步加载程序
 	static void syncLoadExe(string exePath)
 	{
 		ShellExecute(NULL, "open", exePath.c_str(), NULL, NULL, SW_SHOW);
@@ -52,6 +53,7 @@ public:
 		}
 	}
 
+	//分辨率
 	static void setResolution(int x, int y)
 	{
 		DEVMODE DevMode;
@@ -62,6 +64,24 @@ public:
 		DevMode.dmDisplayFrequency = 30;
 		DevMode.dmBitsPerPel = 32;
 		ChangeDisplaySettings(&DevMode, 0);
+	}
+
+	//设置工作目录 类似cd命令
+	static void setWorkDir(string worDir)
+	{
+		SetCurrentDirectory(worDir.c_str());
+	}
+
+	static int getRandom()
+	{
+		static bool isSrand = false;
+		if (isSrand == false)
+		{
+			srand(time(0));
+			isSrand = true;
+		}
+
+		return rand();
 	}
 };
 

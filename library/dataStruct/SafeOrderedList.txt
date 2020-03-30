@@ -1,0 +1,130 @@
+多线程测试插入
+SafeOrderedList<int> testList;
+
+void addNodeFun()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		testList.insert(SystemUtils::getRandom());
+	}
+}
+
+thread addNodeThread1(addNodeFun);
+	thread addNodeThread2(addNodeFun);
+	thread addNodeThread3(addNodeFun);
+
+	addNodeThread1.join();
+	addNodeThread2.join();
+	addNodeThread3.join();
+	
+
+	Console::out(testList.size());
+	testList.out();
+
+多线程测试等待弹出数据
+void waitPopFun()
+{
+	cout << testList.waitPopFront() << endl;
+}
+
+void addDataFun()
+{
+	Sleep(1000);
+	testList.insert(14);
+}
+
+thread waitPopThread(waitPopFun);
+	thread addDataThread(addDataFun);
+
+	waitPopThread.join();
+	addDataThread.join();
+
+
+多线程测试删除数据
+SafeOrderedList<int> testList;
+
+void remove14Fun()
+{
+	Sleep(200);
+	testList.remove(14);
+}
+
+void remove36Fun()
+{
+	Sleep(50);
+	testList.remove(36);
+}
+
+for (int i = 0; i < 10; i++)
+	{
+		testList.insert(14);
+	}
+	for (int i = 0; i < 20; i++)
+	{
+		testList.insert(36);
+	}
+	
+	testList.insert(20);
+	testList.insert(35);
+	testList.insert(37);
+
+	thread remove14Thread(remove14Fun);
+	thread remove36Thread(remove36Fun);
+
+	remove14Thread.join();
+	remove36Thread.join();
+
+	testList.out();
+
+
+
+模板类设计规范
+
+class Test
+{
+public:
+	Test() { m_data = 0; }
+	Test(int data) { m_data = data; }
+
+public:
+	int m_data;
+
+public:
+	bool operator <= (const Test& test)
+	{
+		if (m_data <= test.m_data)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	bool operator >= (const Test& test)
+	{
+		if (m_data >= test.m_data)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+};
+
+   1 必须实现默认构造函数
+   2 必须实现 >= <= 操作符重载
+
+
+
+说明:
+    1 SafeOrderedList 不支持拷贝构造，移动构造， 赋值，移动赋值。
+
+	2 插入接口， 分为 大小为0，  大小大于0 分为插入到表头前，插入到链表中间， 插入到表尾后面
+
+	3 删除接口 分为删除表头， 删除表尾， 删除表中间数据。
+
+	4 如果列表对象被释放了，那么其他线程的waitPop类似函数调用会永远阻塞。
