@@ -104,8 +104,8 @@ private:
 			T tempData = m_dataList[index];
 			m_dataList[index] = m_dataList[maxChildIndex];
 			m_dataList[maxChildIndex] = tempData;
+
+			downSift(maxChildIndex);
 		}
-		
-		downSift(maxChildIndex);
 	}
 };

@@ -11,12 +11,11 @@ MaxHeap<int> testHeap(100);
 	testHeap.insert(38);
 	testHeap.insert(63);
 
-	int count = testHeap.size();
-	for (int i = 0; i < count; i++) //ÅÅĞò
+	while (testHeap.size() > 0)   //ÅÅĞò
 	{
 		int maxData = testHeap.popMax();
 		cout << maxData << " ";
-	}
+	} 
 	Console::out("");
 
 
