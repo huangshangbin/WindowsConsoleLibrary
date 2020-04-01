@@ -17,7 +17,7 @@ public:
 
 HttpServer server;
 server.addHttpService(new TestService());
-server.listen(3000);
+server.listen("localhost", 3000);
 
 --------------------
 ≥£”√Content-Type

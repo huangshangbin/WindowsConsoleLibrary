@@ -1,0 +1,30 @@
+使用:
+#include <library/dataStruct/MaxHeap.hpp>
+
+MaxHeap<int> testHeap(100);
+	testHeap.insert(40);
+	testHeap.insert(37);
+	testHeap.insert(56);
+	testHeap.insert(90);
+	testHeap.insert(17);
+	testHeap.insert(23);
+	testHeap.insert(38);
+	testHeap.insert(63);
+
+	int count = testHeap.size();
+	for (int i = 0; i < count; i++) //排序
+	{
+		int maxData = testHeap.popMax();
+		cout << maxData << " ";
+	}
+	Console::out("");
+
+
+说明:
+   1 内部数组使用的是std::vector类。便于数据的扩充。构造函数初始化可以提高容量增大效率。
+
+   2 不支持拷贝构造，移动构造，赋值，移动赋值。 不支持多线程。
+
+   3 popMax() 如果没有数据，弹出默认值，如果自定义类型，可以设置标志。默认构造函数的数据的标志。
+
+   4 可作为优先级队列 PriorityQueue 来使用,越大的优先级越高。 数据结构可参考 有序树，vector数组的申请和释放效率不高。
