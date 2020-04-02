@@ -89,6 +89,16 @@ for (int i = 0; i < 10; i++)
 	unique_ptr<int> minValue = testList.front();
 	cout << *minValue << endl;
 
+获取尾部元素
+
+	SafeOrderedList<int> testList;
+	testList.insert(10);
+	testList.insert(12);
+	testList.insert(40);
+	testList.insert(35);
+	testList.insert(6);
+	unique_ptr<int> maxValue = testList.back();
+	cout << *maxValue << endl;
 
 
 模板类设计规范

@@ -176,6 +176,19 @@ public:
 		return data;
 	}
 
+	unique_ptr<T> back()
+	{
+		unique_lock<mutex> uniqueLock(m_mutex);
+		if (m_size <= 0)
+		{
+			return unique_ptr<T>(new T);
+		}
+		else
+		{
+			return unique_ptr<T>(new T(m_tail->m_data));
+		}
+	}
+
 	bool popBack(T& data)
 	{
 		lock_guard<mutex> lockGuard(m_mutex);
