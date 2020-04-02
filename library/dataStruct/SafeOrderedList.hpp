@@ -122,6 +122,19 @@ public:
 		}
 	}
 
+	unique_ptr<T> front()
+	{
+		unique_lock<mutex> uniqueLock(m_mutex);
+		if (m_size <= 0)
+		{
+			return unique_ptr<T>(new T);
+		}
+		else
+		{
+			return unique_ptr<T>(new T(m_head->m_data));
+		}
+	}
+
 	bool popFront(T& data)
 	{
 		lock_guard<mutex> lockGuard(m_mutex);

@@ -1,3 +1,5 @@
+#include <library/dataStruct/SafeOrderedList.hpp>
+
 多线程测试插入
 SafeOrderedList<int> testList;
 
@@ -75,6 +77,17 @@ for (int i = 0; i < 10; i++)
 	remove36Thread.join();
 
 	testList.out();
+
+获取头部元素
+
+	SafeOrderedList<int> testList;
+	testList.insert(10);
+	testList.insert(12);
+	testList.insert(40);
+	testList.insert(35);
+	testList.insert(6);
+	unique_ptr<int> minValue = testList.front();
+	cout << *minValue << endl;
 
 
 
