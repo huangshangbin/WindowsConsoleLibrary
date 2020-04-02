@@ -1,0 +1,39 @@
+json数组使用
+#include<library/dataStruct/JsonObject.hpp>
+
+    JsonObject jsonNode;
+    jsonNode.setValue("intValue", 10);
+     jsonNode.setValue("elseValue", 20);
+
+    JsonObject jsonArray;
+    jsonArray.addObject(jsonNode);
+    jsonArray.addObject(jsonNode);
+
+    jsonNode.setValue("a", 30);
+    jsonArray.addObject(jsonNode);
+
+    Console::out(jsonArray.getObject(2).toString());
+
+ json对象使用
+ #include<library/dataStruct/JsonObject.hpp>
+
+    JsonObject jsonNode;
+    jsonNode.setValue("intValue", 10);
+     jsonNode.setValue("doubleValue", (double)20.12);
+
+
+    JsonObject jsonArray;
+    jsonArray.addObject(jsonNode);
+    jsonArray.addObject(jsonNode);
+
+    jsonNode.setValue("name", "huang");
+    jsonArray.addObject(jsonNode);
+
+    JsonObject jsonObject;
+    jsonObject.setValue("array", jsonArray);
+    jsonObject.setValue("object", jsonNode);
+
+    Console::out(jsonObject.toString());
+
+说明：
+	1  long 类型用double类型替换

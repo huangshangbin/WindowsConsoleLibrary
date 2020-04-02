@@ -1,0 +1,37 @@
+使用:
+#include<library/dataStruct/private/jsonla.hpp>
+using namespace ggicci;
+
+      Json json = Json::Parse("{          \  
+        \"id\": 18293,                  \  
+        \"name\": \"Ggicci\",           \  
+        \"birthday\": [1991, 11, 10],   \  
+        \"man\": true                   \  
+    }");  
+
+    Console::out(json["name"].AsString()); //获取
+
+    Console::out(json.ToString());   //tostring
+
+    json["addNode"] = "testNode";  //添加
+
+    Console::out(json.ToString());
+
+    Json jsonNode = Json::Parse("{}");
+    jsonNode["node"] = "arrayNode";
+    Json jsonArray = Json::Parse("[]");
+    jsonArray.Push(jsonNode);   //数组添加
+    jsonArray.Push(jsonNode);
+    jsonArray.Push(jsonNode);
+
+    Console::out(jsonArray.ToString());
+
+    json.AddProperty("array", jsonArray); //添加数组,或者对象
+
+    Console::out(json.ToString());
+
+    jsonArray.Remove(0);//数组删除
+    Console::out(jsonArray.ToString());
+
+    json.Remove("id"); //对象删除
+    Console::out(json.ToString());
