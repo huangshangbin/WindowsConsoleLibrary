@@ -1,6 +1,6 @@
 #pragma once
 
-#include<library/dataStruct/private/jsonla.hpp>
+#include<library/dataStruct/private/jsonla.h>
 using namespace ggicci;
 
 #include<string>
