@@ -100,6 +100,17 @@ for (int i = 0; i < 10; i++)
 	unique_ptr<int> maxValue = testList.back();
 	cout << *maxValue << endl;
 
+获取元素列表用位置
+
+	SafeOrderedList<int> testList;
+	testList.insert(10);
+	testList.insert(12);
+	testList.insert(40);
+	testList.insert(35);
+	testList.insert(6);
+		vector<int> dataList = testList.getDataListUsePos(2, 4);	for (auto& data : dataList)	{		cout << data << " ";	}	Console::out("");
+	testList.out();
+
 
 模板类设计规范
 

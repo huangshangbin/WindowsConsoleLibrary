@@ -230,6 +230,34 @@ public:
 		return data;
 	}
 
+	vector<T> getDataListUsePos(int startIndex, int endIndex)
+	{
+		lock_guard<mutex> lockGuard(m_mutex);
+
+		vector<T> dataList;
+
+		if (startIndex < 0 || endIndex >= m_size)
+		{
+			return std::move(dataList);
+		}
+		
+		int dataCount = endIndex - startIndex + 1;
+		ListNode<T>* nodePtr = m_head;
+		for (int i = 0; i < startIndex; i++)
+		{
+			nodePtr = nodePtr->m_next;
+		}
+
+		for (int i = 0; i < dataCount; i++)
+		{
+			dataList.push_back(nodePtr->m_data);
+
+			nodePtr = nodePtr->m_next;
+		}
+
+		return std::move(dataList);
+	}
+	
 	void remove(T data)
 	{
 		lock_guard<mutex> lockGuard(m_mutex);
