@@ -14,6 +14,13 @@ json数组使用
 
     Console::out(jsonArray.getObject(2).toString());
 
+
+	-----------------------------
+	JsonObject testArrayJson;
+	testArrayJson.addValue(10);
+	int data = testArrayJson.getIntValue(0);
+	Console::out(data);
+
  json对象使用
  #include<library/dataStruct/JsonObject.hpp>
 

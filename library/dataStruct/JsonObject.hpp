@@ -75,6 +75,24 @@ public:
         m_type = JsonObjectType::ARRAY;
     }
 
+	template<class T>
+	void addValue(T data)
+	{
+		if (m_type == JsonObjectType::OBJECT)
+		{
+			return;
+		}
+
+		if (m_json.IsNull())
+		{
+			m_json = Json::Parse("[]");
+		}
+
+		Json valueJson(data);
+		m_json.Push(valueJson);
+		m_type = JsonObjectType::ARRAY;
+	}
+
     JsonObject getObject(int index)
     {
         if((index < 0) || (index >= m_json.Size()) || m_type != JsonObjectType::ARRAY)
@@ -86,6 +104,36 @@ public:
         JsonObject jsonObject(m_json[index].ToString());
         return std::move(jsonObject);
     }
+
+	int getIntValue(int index)
+	{
+		if ((index < 0) || (index >= m_json.Size()) || m_type != JsonObjectType::ARRAY)
+		{
+			return 0;
+		}
+
+		return m_json[index].AsInt();
+	}
+
+	double getDoubleValue(int index)
+	{
+		if ((index < 0) || (index >= m_json.Size()) || m_type != JsonObjectType::ARRAY)
+		{
+			return 0;
+		}
+
+		return m_json[index].AsDouble();
+	}
+
+	string getStringValue(int index)
+	{
+		if ((index < 0) || (index >= m_json.Size()) || m_type != JsonObjectType::ARRAY)
+		{
+			return 0;
+		}
+
+		return m_json[index].AsString();
+	}
 
 
 //对象类型的json
