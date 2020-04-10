@@ -10,6 +10,10 @@
 #ifndef CPPHTTPLIB_HTTPLIB_H
 #define CPPHTTPLIB_HTTPLIB_H
 
+
+#pragma warning(disable:4996)
+
+
 /*
  * Configuration
  */

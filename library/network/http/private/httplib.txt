@@ -38,7 +38,8 @@ using namespace httplib;
 编译
     1. 最上面8行 #undef max 
 	2.   std::min  改为  min
-	3. c/c++ 预处理器  添加 WIN32_LEAN_AND_MEAN
+	3.  最上面 14行 #pragma warning(disable:4996)
+	4. c/c++ 预处理器  添加 WIN32_LEAN_AND_MEAN
 
 
 说明：
