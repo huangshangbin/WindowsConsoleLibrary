@@ -6,6 +6,8 @@
 #include <library/system/Process.hpp>
 #include <library/utils/WndUtils.hpp>
 
+#include <library/utils/private/sole.hpp>
+
 #include <string>
 using namespace std;
 
@@ -82,6 +84,12 @@ public:
 		}
 
 		return rand();
+	}
+
+	static string getUuid()
+	{
+		sole::uuid u0 = sole::uuid0();
+		return u0.str();
 	}
 };
 
