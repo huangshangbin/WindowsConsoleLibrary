@@ -151,6 +151,8 @@ public:
 		data = pNode->m_data;
 		delete pNode;
 
+		m_size--;
+
 		return true;
 	}
 
@@ -173,6 +175,8 @@ public:
 
 		T data = pNode->m_data;
 		delete pNode;
+
+		m_size--;
 
 		return data;
 	}
@@ -205,6 +209,8 @@ public:
 		data = pNode->m_data;
 		delete pNode;
 
+		m_size--;
+
 		return true;
 	}
 
@@ -227,6 +233,8 @@ public:
 
 		T data = pNode->m_data;
 		delete pNode;
+
+		m_size--;
 
 		return data;
 	}
