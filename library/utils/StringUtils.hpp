@@ -14,6 +14,10 @@ public:
 	static deque<string> splitString(string srcStr, string splitStr)
 	{
 		deque<string> dataList;
+		if (srcStr.length() == 0)
+		{
+			return std::move(dataList);
+		}
 
 		string str = srcStr;
 		if (srcStr[srcStr.length() - 1] == '\n')
