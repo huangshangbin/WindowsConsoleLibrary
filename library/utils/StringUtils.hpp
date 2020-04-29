@@ -125,7 +125,6 @@ public:
 
 		return getStringUsePos(src, 0, index - 1);
 	}
-
 	
 
 

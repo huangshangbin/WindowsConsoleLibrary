@@ -3,6 +3,8 @@
 #include <windows.h>
 
 #include <string>
+#include <sstream>
+#include <iomanip>
 
 #include <iostream>
 
@@ -26,9 +28,12 @@ public:
 		return std::to_string(intValue);
 	}
 
-	static string getString(double doubleValue)
+	static string getString(double doubleValue, int saveDigit = 4)
 	{
-		return std::to_string(doubleValue);
+		std::stringstream ss;
+		ss << std::setprecision(saveDigit) << doubleValue;
+
+		return ss.str();
 	}
 
 	static string getString(char chArray[])
