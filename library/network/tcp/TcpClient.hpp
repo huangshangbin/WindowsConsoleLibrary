@@ -1,7 +1,6 @@
 #pragma once 
 
-#include <WinSock2.h>
-#pragma comment(lib, "ws2_32.lib")
+#include <library/utils/NetworkUtils.hpp>
 
 #include <iostream>
 #include <memory>
@@ -12,8 +11,10 @@ using namespace std;
 class TcpClient
 {
 public:
-	static unique_ptr<string> send(string host, int port, string& data)//加上dns解析
+	static unique_ptr<string> send(string host, int port, string& data)
 	{
+		host = NetworkUtils::getHostIpList(host)[0];//dns解析
+
 		unique_ptr<string> result(new string);
 
 		WORD versionRequired;
@@ -46,16 +47,23 @@ public:
 		::send(clientSocket, data.c_str(), data.length(), 0);
 		err = GetLastError();
 
-		char receiveBuf[100];
-		int size = recv(clientSocket, receiveBuf, 100, 0);
+		const int bufferLength = 1024 * 20;//尽量大,recv阻塞可能性小
+		char receiveBuf[bufferLength];
+		
 		while (true)
 		{
+			int size = recv(clientSocket, receiveBuf, bufferLength, 0);//服务端发送数据刚好为bufferLength(或者倍数),这里会阻塞，没有协议，无法解决
 			if (size <= 0)
 			{
-				
+				break;
 			}
 
-			result->assign(receiveBuf, size);
+			result->append(receiveBuf, size);
+
+			if (size < bufferLength)
+			{
+				break;
+			}
 		}
 		
 		err = GetLastError();

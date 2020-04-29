@@ -1,0 +1,18 @@
+1 http¿Í»§¶Ë
+	string data = "GET /creative/vcg/veer/612/veer-302505003.jpg HTTP/1.1\r\n"\
+		"Host: goss3.veer.com\r\n"\
+		"Connection: keep-alive\r\n"\
+		"Upgrade-Insecure-Requests: 1\r\n"\
+		"User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.75 Safari/537.36\r\n"\
+		"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\n"\
+		"Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2\r\n"\
+		"Sec-Fetch-Site: none\r\n"\
+		"Accept-Encoding: gzip, deflate\r\n"\
+		"Cookie: sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%22171c3b0fc9b379-093d7d253abfbd8-4c302e7f-1296000-171c3b0fc9c7c8%22%2C%22first_id%22%3A%22%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E4%BB%98%E8%B4%B9%E5%B9%BF%E5%91%8A%E6%B5%81%E9%87%8F%22%2C%22%24latest_search_keyword%22%3A%22%E5%9B%BE%E7%89%87%22%2C%22%24latest_referrer%22%3A%22https%3A%2F%2Fwww.baidu.com%2Fbaidu.php%22%2C%22%24latest_landing_page%22%3A%22https%3A%2F%2Fwww.veer.com%2Fphoto%2F%3Futm_source%3Dbaidu%26utm_medium%2520%3Dcpc%26utm_campaign%3D%25E9%2580%259A%25E7%2594%25A8%25E8%25AF%258D%26utm_content%3D%25E9%2580%259A%25E7%2594%25A8%25E8%25AF%258D-%25E5%259B%25BE%25E7%2589%2587%26utm_term%3D%25E5%259B%25BE%25E7%2589%2587%26chid%3D901%26%22%2C%22%24latest_utm_source%22%3A%22baidu%22%2C%22%24latest_utm_campaign%22%3A%22%E9%80%9A%E7%94%A8%E8%AF%8D%22%2C%22%24latest_utm_content%22%3A%22%E9%80%9A%E7%94%A8%E8%AF%8D-%E5%9B%BE%E7%89%87%22%2C%22%24latest_utm_term%22%3A%22%E5%9B%BE%E7%89%87%22%7D%2C%22%24device_id%22%3A%22171c3b0fc9b379-093d7d253abfbd8-4c302e7f-1296000-171c3b0fc9c7c8%22%7D; sajssdk_2015_cross_new_user=1; Hm_lvt_f2de34005a64c75f44715498bcb136f9=1588126089; Hm_lpvt_f2de34005a64c75f44715498bcb136f9=1588126381; _ga=GA1.2.1330532065.1588126089; _gid=GA1.2.313681786.1588126089; _fp_=eyJpcCI6IjExNC45My4yNDIuMSIsImZwIjoiZDBmZTFiNzBlMTQ2MzhlMjFlZWRiZDMwNjNmOWFkN2YiLCJocyI6IiQyYSQwOCRlN09XT05EbjlBNlBmUHZEY0p2VnpPZWg0eU5ubVR5UFpBUlhmbUpuQmJ0N3NncG1aM2lidSJ9; _gat=1; _gat_gtag_UA_103598720_1=1\r\n"\
+		"\r\n";
+
+	unique_ptr<string> result = TcpClient::send("goss3.veer.com", 80, data);
+	cout << *result << endl;
+
+
+2
