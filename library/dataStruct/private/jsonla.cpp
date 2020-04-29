@@ -1,5 +1,7 @@
 #include "jsonla.h"
 
+#include <iomanip>
+
 namespace ggicci
 {
 	using namespace std;
@@ -285,12 +287,24 @@ namespace ggicci
 		return *this;
 	}
 
+	string getDoubleStr(double doubleValue, int saveDigit = 20)
+	{
+		int pos = std::to_string(doubleValue).find(".");
+		int accuracy = pos + 1 + saveDigit;
+
+		std::stringstream ss;
+		ss << std::setprecision(accuracy) << doubleValue;
+
+		return ss.str();
+	}
+
 	string Json::ToString() const
 	{
 		ostringstream oss;
+
 		switch (kind_)
 		{
-		case kNumber: oss << *static_cast<double*>(data_); break;
+		case kNumber: oss << getDoubleStr(*static_cast<double*>(data_)); break;
 		case kString: oss << "\"" << *static_cast<string*>(data_) << "\""; break;
 		case kBool: oss << boolalpha << *static_cast<bool*>(data_); break;
 		case kNull: oss << "null"; break;
