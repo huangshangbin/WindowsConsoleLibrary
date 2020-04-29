@@ -26,6 +26,11 @@ public:
 		return std::to_string(intValue);
 	}
 
+	static string getString(double doubleValue)
+	{
+		return std::to_string(doubleValue);
+	}
+
 	static string getString(char chArray[])
 	{
 		return chArray;
