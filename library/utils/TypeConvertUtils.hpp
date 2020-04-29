@@ -30,8 +30,11 @@ public:
 
 	static string getString(double doubleValue, int saveDigit = 4)
 	{
+		int pos = std::to_string(doubleValue).find(".");
+		int accuracy = pos + saveDigit;
+
 		std::stringstream ss;
-		ss << std::setprecision(saveDigit) << doubleValue;
+		ss << std::setprecision(accuracy) << doubleValue;
 
 		return ss.str();
 	}
