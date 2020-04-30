@@ -69,7 +69,14 @@ public:
 		httplib::Client httpClient(urlParse.m_host, urlParse.m_port);
 		auto res = httpClient.Get(urlParse.m_route.c_str());
 
-		return res->body;
+		if (res != nullptr)
+		{
+			return res->body;
+		}
+		else
+		{
+			return "";
+		}
 	}
 
 	static string post(string url, string requestData)
@@ -79,7 +86,14 @@ public:
 
 		auto res = httpClient.Post(urlParse.m_route.c_str(), requestData, "text/plain");
 
-		return res->body;
+		if (res != nullptr)
+		{
+			return res->body;
+		}
+		else
+		{
+			return "";
+		}
 	}
 
 	static string postFile(string url, string filePath)
