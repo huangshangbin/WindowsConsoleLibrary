@@ -128,7 +128,7 @@ public:
 		unique_lock<mutex> uniqueLock(m_mutex);
 		if (m_size <= 0)
 		{
-			return unique_ptr<T>(new T);
+			return nullptr;
 		}
 		else
 		{
@@ -186,7 +186,7 @@ public:
 		unique_lock<mutex> uniqueLock(m_mutex);
 		if (m_size <= 0)
 		{
-			return unique_ptr<T>(new T);
+			return nullptr;
 		}
 		else
 		{

@@ -33,18 +33,20 @@ public:
 		m_conditionVar.notify_one();
 	}
 
-	bool pop(T& data)
+	unique_ptr<T> pop()
 	{
 		lock_guard<mutex> lockGuard(m_mutex);
 		if (m_queue.empty())
 		{
-			return false;
+			return nullptr;
 		}
+		else
+		{
+			T data = m_queue.front();
+			m_queue.pop();
 
-		data = m_queue.front();
-		m_queue.pop();
-
-		return true;
+			return unique_ptr<T>(new T(data));
+		}
 	}
 
 	T waitPop()

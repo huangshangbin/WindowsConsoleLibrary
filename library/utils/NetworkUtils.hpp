@@ -43,5 +43,44 @@ public:
 		return std::move(ipList);
 	}
 
+	static bool telnet(string host, int port)
+	{
+		host = getHostIpList(host)[0];
+
+		WORD versionRequired;
+		WSADATA wsaData;
+		versionRequired = MAKEWORD(1, 1);
+
+		int err = WSAStartup(versionRequired, &wsaData);
+
+		bool result = true;
+		if (err)
+		{
+			result = false;
+		}
+
+		SOCKET clientSocket = socket(AF_INET, SOCK_STREAM, 0);
+
+		linger m_sLinger;
+		m_sLinger.l_onoff = 1;  // (在closesocket()调用,但是还有数据没发送完毕的时候容许逗留)
+		m_sLinger.l_linger = 0; // (容许逗留的时间为0秒)
+		setsockopt(clientSocket, SOL_SOCKET, SO_LINGER, (const char*)&m_sLinger, sizeof(linger));
+
+		SOCKADDR_IN clientSockIn;
+		clientSockIn.sin_addr.S_un.S_addr = inet_addr(host.c_str());
+		clientSockIn.sin_family = AF_INET;
+		clientSockIn.sin_port = htons(port);
+
+		err = connect(clientSocket, (SOCKADDR*)&clientSockIn, sizeof(SOCKADDR));
+		if (err)
+		{
+			result = false;
+		}
+
+		closesocket(clientSocket);
+		WSACleanup();
+
+		return result;
+	}
 };
 
