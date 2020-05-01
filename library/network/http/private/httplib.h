@@ -3571,7 +3571,8 @@ inline bool Client::handle_request(Stream &strm, const Request &req,
         auto key = is_proxy ? "Proxy-Authorization" : "WWW-Authorization";
         new_req.headers.erase(key);
         new_req.headers.insert(make_digest_authentication_header(
-            req, auth, 1, random_string(10), username, password, is_proxy));
+            req, auth, 1, random_string(10), username, passw
+			ord, is_proxy));
 
         Response new_res;
 

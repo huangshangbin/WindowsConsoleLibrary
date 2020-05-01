@@ -1,0 +1,43 @@
+服务端:
+   #include <library/network/tcp/IocpServer.hpp>
+
+class MyIocpServer : public IocpServer
+{
+public:
+	bool isCompleteData(string& dataBuffer)
+	{
+		int length = dataBuffer.length();
+
+		if (dataBuffer[length - 1] == ' ' && dataBuffer[length - 2] == '7' && dataBuffer[length - 3] == '4')
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	void handle(string& request, string& response)
+	{
+		cout << request << endl;
+		response = "huang";
+	}
+
+};
+
+int main()
+{
+	MyIocpServer server;
+	server.listen("127.0.0.1", 5000);
+}
+
+客户端:
+  CString data;
+	for (int i = 1; i < 2048; i++)
+	{
+		data = data + TypeConvertUtils::getCStringUseInt(i) + " ";
+	}
+
+	CString result = WindowsUtils::sendMessageToServer("127.0.0.1", 5000, data);
+	AfxMessageBox(result);
