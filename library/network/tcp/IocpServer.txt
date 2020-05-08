@@ -41,3 +41,8 @@ int main()
 
 	CString result = WindowsUtils::sendMessageToServer("127.0.0.1", 5000, data);
 	AfxMessageBox(result);
+
+
+
+说明:
+    1 当每次请求的buffer小于2048个字节时， isCompleteData 可以不用覆写。

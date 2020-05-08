@@ -291,9 +291,6 @@ public:
         m_type = jsonObject.m_type;
     }
 
-//内部函数
-private:
-
 };
 
 

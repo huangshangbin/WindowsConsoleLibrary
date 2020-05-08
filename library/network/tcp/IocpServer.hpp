@@ -113,7 +113,7 @@ private:
 
 
 public:
-	virtual bool isCompleteData(string& dataBuffer) = 0;
+	virtual bool isCompleteData(string& dataBuffer) { return true; };
 	virtual void handle(string& request, string& response) = 0;
 
 public:
