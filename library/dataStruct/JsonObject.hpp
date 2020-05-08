@@ -34,6 +34,11 @@ public:
 
     JsonObject(string jsonStr)
     {
+		if (jsonStr == "")
+		{
+			jsonStr = "{}";
+		}
+
         m_json = Json::Parse(jsonStr.c_str());
 
         if(jsonStr.length() == 0)
