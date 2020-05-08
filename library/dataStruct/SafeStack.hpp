@@ -1,52 +1,45 @@
 #pragma once
 
-/*
-   github : https://github.com/yangxingwu/thread_safe_queue/blob/master/thread_safe_queue.cpp
-*/
-
-#include <queue>
-
+#include <stack>
 #include <memory>
 #include <mutex>
 #include <condition_variable>
 
 using namespace std;
 
-template <typename T>
-class SafeQueue
+template<typename T>
+class SafeStack
 {
 public:
-	SafeQueue() {}
+	SafeStack() {}
 
 private:
 	mutex m_mutex;
 	condition_variable m_conditionVar;
 
-	queue<T> m_queue;
+	stack<T> m_stack;
 
 public:
 	void push(T data)
 	{
 		lock_guard<mutex> lockGuard(m_mutex);
-		m_queue.push(data);
+		m_stack.push(data);
 
 		m_conditionVar.notify_one();
 	}
 
-	unique_ptr<T> pop()
+	bool pop(T& data)
 	{
 		lock_guard<mutex> lockGuard(m_mutex);
-		if (m_queue.empty())
+		if (m_stack.empty())
 		{
-			return nullptr;
+			return false;
 		}
-		else
-		{
-			T data = m_queue.front();
-			m_queue.pop();
 
-			return unique_ptr<T>(new T(data));
-		}
+		data = m_stack.top();
+		m_stack.pop();
+
+		return true;
 	}
 
 	T waitPop()
@@ -63,8 +56,8 @@ public:
 			}
 		});
 
-		T data = m_queue.front();
-		m_queue.pop();
+		T data = m_stack.top();
+		m_stack.pop();
 
 		return data;
 	}
@@ -73,27 +66,25 @@ public:
 	{
 		lock_guard<mutex> lockGuard(m_mutex);
 
-		return m_queue.empty();
+		return m_stack.empty();
 	}
 
 	int size()
 	{
 		lock_guard<mutex> lockGuard(m_mutex);
 
-		return m_queue.size();
+		return m_stack.size();
 	}
 
 	void clear()
 	{
 		lock_guard<mutex> lockGuard(m_mutex);
 
-		queue<T> tempQueue;
-		m_queue.swap(tempQueue);
+		stack<T> tempStack;
+		m_stack.swap(tempStack);
 	}
 
-
-
 private:
-	SafeQueue(const SafeQueue& safeQueue) {}
-	void operator = (const SafeQueue& safeQueue) {}
+	SafeStack(const SafeStack& safeStack) {}
+	void operator = (const SafeStack& safeStack) {}
 };
