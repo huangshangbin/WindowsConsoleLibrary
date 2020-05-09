@@ -46,3 +46,19 @@ int main()
 
 说明:
     1 当每次请求的buffer小于2048个字节时， isCompleteData 可以不用覆写。
+	2 请求的数据每次都会进行一次拷贝。并且随着请求的数据量加大，我对string的append效率不确定。
+	  重构我的IocpServer类优化:
+	     （1） struct BufferNode 
+		       {
+			     char* m_buffer;
+				 BufferNode* m_nextBuffer;
+				}
+				每一个BufferNode都是确定大小的缓存，总buffer是所有buffer的数据链表，
+				IocpSocketData添加一个记录m_nextBuffer为null的那个节点的大小。
+
+           说明：  请求数据超过buffersize，buffer的拷贝就不能避免。 这种设计方案可以避免内存不必要的申请和释放。
+		           同时做到了最小拷贝。
+				   这只是一种想法，实际情况应该根据业务设计。
+				    
+
+    3  响应的数据没有拷贝。都是通过引用的方式交由客户端处理。
