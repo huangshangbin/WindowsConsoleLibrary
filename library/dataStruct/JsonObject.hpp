@@ -59,6 +59,25 @@ public:
         }
     }
 
+private:
+	JsonObject(Json json)
+	{
+		m_json = json;
+
+		if (m_json.IsArray())
+		{
+			m_type = ARRAY;
+		}
+		else if (m_json.IsObject())
+		{
+			m_type = OBJECT;
+		}
+		else
+		{
+			m_type = UNDEFINE;
+		}
+	}
+
 
 
 
@@ -106,7 +125,7 @@ public:
             return nullObject;
         }
 
-        JsonObject jsonObject(m_json[index].ToString());
+        JsonObject jsonObject(m_json[index]);
         return std::move(jsonObject);
     }
 
@@ -260,7 +279,7 @@ public:
             return std::move(nullObject);
         }
 
-        JsonObject jsonObject(m_json[key.c_str()].AsString());
+        JsonObject jsonObject(m_json[key.c_str()]);
         return std::move(jsonObject);
     }
 
