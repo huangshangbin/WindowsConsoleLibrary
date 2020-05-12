@@ -107,5 +107,10 @@ public:
 	{
 		return atoi(str.c_str());
 	}
+
+	static double getDouble(string str)
+	{
+		return atof(str.c_str());
+	}
 };
 
