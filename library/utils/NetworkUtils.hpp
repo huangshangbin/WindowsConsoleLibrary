@@ -43,6 +43,19 @@ public:
 		return std::move(ipList);
 	}
 
+	static string getLocalHostName()
+	{
+		WSADATA wsData;
+		::WSAStartup(MAKEWORD(2, 2), &wsData);
+
+		char hostName[100];
+		gethostname(hostName, sizeof(hostName));// 获得本机主机名.
+
+		::WSACleanup();
+
+		return hostName;
+	}
+
 	static bool telnet(string host, int port)
 	{
 		host = getHostIpList(host)[0];
