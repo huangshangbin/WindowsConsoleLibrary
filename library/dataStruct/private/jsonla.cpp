@@ -287,7 +287,7 @@ namespace ggicci
 		return *this;
 	}
 
-	string getDoubleStr(double doubleValue, int saveDigit = 20)
+	string getDoubleStr(double doubleValue, int saveDigit = 15)
 	{
 		int pos = std::to_string(doubleValue).find(".");
 		int accuracy = pos + 1 + saveDigit;
