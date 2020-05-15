@@ -287,13 +287,10 @@ namespace ggicci
 		return *this;
 	}
 
-	string getDoubleStr(double doubleValue, int saveDigit = 10)
+	string getDoubleStr(double doubleValue)//double的精度只有16位
 	{
-		int pos = std::to_string(doubleValue).find(".");
-		int accuracy = pos + 1 + saveDigit;
-
 		std::stringstream ss;
-		ss << std::setprecision(accuracy) << doubleValue;
+		ss << std::setprecision(15) << doubleValue;
 
 		return ss.str();
 	}
